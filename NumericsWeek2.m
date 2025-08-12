@@ -36,3 +36,27 @@ while i <= 3
     fprintf("err: %.4f\n", epsilon);
     prevrangemid = rangemid;
 end
+
+% Question 2
+Mm = 0.5;
+guess = 0.5;
+tolerance = 10 ^ -4;
+
+
+for i = 1:100
+    syms f(x);
+    f(x) = cot(x) - Mm * x;
+    syms df(x);
+    df(x) = diff(f);
+
+    x_new = guess - f(guess) / df(guess);
+
+    err = abs((x_new - guess) / guess);
+
+    guess = x_new;
+    if err < tolerance
+        break;
+    end
+end
+
+fprintf("%.4f\n", guess);
