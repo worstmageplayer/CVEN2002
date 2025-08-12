@@ -1,0 +1,37 @@
+%% Week 2
+clear all;
+% Question 1
+% Bisection
+fprintf("Question 1\n");
+range1 = 0.1500;
+
+range2 = 0.9000;
+syms f(x);
+f(x) = x*tan(x) - 0.3;
+
+t1 = f(range1);
+tmid = f((range1 + range2) / 2);
+t2 = f(range2);
+
+i = 0;
+while i <= 3
+    fprintf("t1: %.4f, tmid: %.4f, t2: %.4f\n", t1, tmid, t2);
+    if tmid < 0.0
+        fprintf("tmid < 0.0");
+        if t2 < 0.0
+            fprintf("t2 < 0.0");
+            t2 = tmid;
+        else
+            t1 = tmid;
+        end
+    else
+        fprintf("tmid > 0.0");
+        if t2 < 0.0
+            fprintf("t2 < 0.0");
+            t1 = tmid;
+        else
+            t2 = tmid;
+        end
+    end
+    i = i + 1;
+end
