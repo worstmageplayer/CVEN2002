@@ -1,11 +1,9 @@
 %% Week 2
 clear all;
-% Question 1
+%% Question 1
 % Bisection Method
 fprintf("Question 1\n");
-xl = 0.1500;
-xu = 0.9000;
-range1 = 0.0500;
+range1 = 0.05;
 range2 = 0.9000;
 syms f(x);
 f(x) = x*tan(x) - 0.1;
@@ -37,9 +35,11 @@ while i <= 3
     prevrangemid = rangemid;
 end
 
-% Question 2
+%% Question 2
 % Newton Raphson Method
 fprintf("Question 2\n");
+% Variant 1
+fprintf("variant 1\n");
 Mm = 0.5;
 guess = 0.5;
 tolerance = 10 ^ -4;
@@ -63,13 +63,29 @@ end
 
 fprintf("%.4f\n", guess);
 
-% Question 3
+% Variant 2
+fprintf("variant 2\n");
+x0 = 8.01;
+x_new = x0;
+syms f(x)
+f(x) = exp(-(x-8.9)^2 / 2) - 1;
+syms df(x)
+df(x) = diff(x);
+
+for i = 0:3
+    fprintf("%d %.4f, %.4f\n", i, x_new, err);
+    x_new = x0 - f(x0) / df(x0);
+    err = abs((x_new - x0) / x0) * 100;
+    x0 = x_new;
+end
+
+%% Question 3
 % Secant Method
 fprintf("Question 3\n");
-g1 = 0.8625;
-g2 = 1.265;
+g1 = 0.5625;
+g2 = 0.825;
 tolerance = 10 ^ -4;
-R = 1.15;
+R = 0.75;
 
 syms f(x)
 f(x) = 4 * x * (2*R - sqrt( 4*R^2 - (x/4)^2)) - (x/4)^2;
@@ -89,4 +105,4 @@ for i = 1:100
     end
 end
 
-fprintf("%.4f", approx);
+fprintf("%.4f\n", approx);
