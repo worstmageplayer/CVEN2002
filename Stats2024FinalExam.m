@@ -1,7 +1,45 @@
 %% Question 1
-weight = [46.84, 82.54, 57.49, 77.92, 63.29, 97.9, 95.89];
-height = [164.2, 181.8, 173, 179.6, 168.6, 188.4, 184];
+fprintf("\nQuestion 1\n");
+clear all
+weight = [155 125 170 115 205 220 99];
+height = [68 65 69 63 70 72 61];
+
 mdl = fitlm(weight, height);
+a = mdl.Coefficients.Estimate(1);
+b = mdl.Coefficients.Estimate(2);
+
+fprintf("equation: %.4f + %.4fx\n", a, b);
+
+rsquared = mdl.Rsquared.Ordinary;
+fprintf("proportion of variability: %.4f\n", rsquared);
+
+correlation = sqrt(rsquared);
+fprintf("observed sample correlation: %.4f\n", correlation);
+
+predicted_height = predict(mdl, 100);
+fprintf("predicted height: %.4f\n", predicted_height);
+
+[~, ci]  = predict(mdl, 100, "Alpha", 0.03);
+fprintf("confidence interval: [%.4f, %.4f]\n", ci(1), ci(2));
+
+[~, predictInterval] = predict(mdl, 100, "Alpha", 0.03, "Prediction", "observation");
+fprintf("prediction interval: [%.4f, %.4f]\n", predictInterval(1), predictInterval(2));
+
+fprintf("expected change: %.4f\n", b * 4);
+
+tstat = mdl.Coefficients.tStat(2);
+pvalue = mdl.Coefficients.pValue(2);
+df = mdl.DFE;
+
+fprintf("t stat: %.4f\n", tstat);
+fprintf("degrees of freedom: %d\n", df);
+fprintf("p value: %.8f\n", pvalue);
+
+if pvalue < 0.05
+    fprintf("Reject\n");
+else
+    fprintf("Dp not reject\n");
+end
 
 %% Question 4
 clear all
