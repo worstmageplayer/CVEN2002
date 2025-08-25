@@ -73,6 +73,23 @@ p70 = binocdf(69, ntotal, p);
 probability = p79 + p70;
 fprintf("Probability: %.4f\n", probability);
 
+%% Question 3
+fprintf("\nQuestion 3\n");
+clear all
+
+Caltex = [243.96 237.58 243.96 241.8 241.98 246.38 241.8 241.8 249.94 249.94 246.38 241.8 241.8 245.44];
+MP = [230 226.48 226.38 225.02 223.25 226.25 229.72 226.25 238.72 223.85 229.98 223.8 227.57 227.55];
+
+nMP = length(MP);
+meanMP = mean(MP);
+sdMP = std(MP);
+seMP = sdMP / sqrt(nMP);
+tcrit = tinv(0.99, nMP - 1);
+lower = meanMP - tcrit * seMP;
+upper = meanMP + tcrit * seMP;
+
+fprintf("CI: [%.4f, %.4f]\n", lower, upper);
+
 %% Question 4
 clear all
 fprintf("\nQuestion 4\n");
