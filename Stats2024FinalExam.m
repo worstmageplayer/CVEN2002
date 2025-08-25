@@ -11,12 +11,11 @@ b = mdl.Coefficients.Estimate(2);
 fprintf("equation: %.4f + %.4fx\n", a, b);
 
 rsquared = mdl.Rsquared.Ordinary;
-fprintf("proportion of variability: %.4f\n", rsquared);
-
 correlation = sqrt(rsquared);
-fprintf("observed sample correlation: %.4f\n", correlation);
-
 predicted_height = predict(mdl, 100);
+
+fprintf("proportion of variability: %.4f\n", rsquared);
+fprintf("observed sample correlation: %.4f\n", correlation);
 fprintf("predicted height: %.4f\n", predicted_height);
 
 [~, ci]  = predict(mdl, 100, "Alpha", 0.03);
