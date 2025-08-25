@@ -41,12 +41,45 @@ else
     fprintf("Dp not reject\n");
 end
 
+%% Question 2
+fprintf("\nQuestion 2\n");
+clear all
+p = 0.45;
+size = 23;
+
+expected = p * size;
+sd = sqrt(size * p * (1 - p));
+
+fprintf("Expected: %.4f\n", expected);
+fprintf("Standard Deviation: %.4f\n", sd);
+
+exact = 1 - binocdf(11, size, p);
+fprintf("Exact: %.4f\n", exact);
+
+z = (11.5 - expected) / sd;
+prob = 1 - normcdf(z, 0, 1);
+fprintf("Approx Prob: %.4f\n", prob);
+
+size2 = 127;
+eX1X2 = (size + size2) * p;
+vX1X2 = size * p * (1 - p) + size2 * p * (1 - p);
+fprintf("E(X1 + X2): %.4f\n", eX1X2);
+fprintf("Var(X1 + X2): %.4f\n", vX1X2);
+
+ntotal = size + size2;
+p79 = 1 - binocdf(80, ntotal, p);
+p70 = binocdf(69, ntotal, p);
+
+probability = p79 + p70;
+fprintf("Probability: %.4f\n", probability);
+
 %% Question 4
 clear all
 fprintf("\nQuestion 4\n");
 
-levels = [6.67, 7.56, 3.82, 6.01, 7.95, 6.03, 5.01, 6.51, 5.01, 5.59, 5.91, 9.1, 4.41, 6.39, 4.64, 4.36, 8.1, 3.7, 6.73, 4.54, 4.66, 4.53, 3.27, 4.13, 8.55, 6.08, 10, 13.09, 5.87, 5.7, 5.93, 8.57, 6.92, 5.4, 11.48, 4.53];
-patients = categorical(["normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH"]);
+
+levels = [8.6, 3.4, 5.7, 7.48, 5.77, 4.09, 5.94, 4.7, 5.37, 7.15, 5.8, 6.38, 6.49, 3.61, 4.1, 3.4, 6.16, 3.22, 4.27, 4.05, 5.28, 3.96, 7.48, 3.04, 2.4, 3.87, 4.27, 9.9, 14.3, 5.75, 5.03, 6.82, 7.9, 5.02, 5.37, 5.74, 10.6, 8.36, 7.85];
+patients = categorical(["normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "normal", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "activeH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH", "inactiveH"]);
 alpha = 0.01;
 
 [panova, tbl, stats] = anova1(levels, patients, "off");
